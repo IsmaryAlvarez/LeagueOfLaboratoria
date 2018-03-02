@@ -167,3 +167,19 @@ function facebookLogin() {
         console.log("Error > " + error);
     });
 }
+
+function uploadFile() {
+    var storage = firebase.storage();
+    var storageRef = firebase.storage().ref();
+
+    var file = document.getElementById("upload-file-selector").files[0];
+    console.log(file);
+    //cuando creamos la referencia, si es que subiremos el archivo
+    //a una carpeta, ponemos el nombre de ella, antes del archivo.
+    var thisRef = storageRef.child("archivosSubidos/" + file.name);
+
+    //Acá ponemos el archivo que obtuvimos desde el <input>
+    thisRef.put(file).then(function(snapshot) {
+        console.log('Uploaded a blob or file!');
+    });
+}
